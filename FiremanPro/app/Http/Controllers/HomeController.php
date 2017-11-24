@@ -22,7 +22,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {/*
         $post = new \App\Post();
         $post->id = 42208;
         
@@ -32,7 +32,7 @@ class HomeController extends Controller
        
         $house ->addGndPlanPhotoFullParametar("GND PRve kuće", "www.url.com");
         $house ->addProfilPhotoFullParametar("profil picc", "www.faca.sas");
-        
+        */
         return view('home');
     }
 }
