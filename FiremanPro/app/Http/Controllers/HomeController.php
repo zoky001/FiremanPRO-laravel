@@ -33,6 +33,8 @@ class HomeController extends Controller
         $house ->addGndPlanPhotoFullParametar("GND PRve kuće", "www.url.com");
         $house ->addProfilPhotoFullParametar("profil picc", "www.faca.sas");
         */
-        return view('home');
+        
+        $posts = \App\Post::all();
+        return view('home',compact('posts'));
     }
 }

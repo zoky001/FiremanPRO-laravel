@@ -70,6 +70,20 @@
                 </div>
             </div>
         </nav>
+        
+                    @if($flash = session('message'))
+   
+     
+             <div id="flash-message" class="panel panel-success hidden-xs hidden-sm">
+      <div class="panel-heading">
+          Obavijest
+      </div>
+      
+      <div class="panel-body">
+          {{ $flash }}
+      </div>
+    </div>
+    @endif
 
         @yield('content')
     </div>

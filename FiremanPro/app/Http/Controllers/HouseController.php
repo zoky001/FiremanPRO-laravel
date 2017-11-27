@@ -54,9 +54,13 @@ class HouseController extends Controller
 
 
         // $this->validate(request(), ['body'=>'required|min:2']);
-$post = new \App\Post();
-        $post->id = 42208;
-        echo request('streetName');
+
+       // echo request('postal_code');
+        
+        
+        $post = \App\Post::where('postal_code', '=', request('postal_code'))->firstOrFail();
+        
+      //  \Symfony\Component\VarDumper\VarDumper::dump($post);
 $house = \App\House::addNewHouse(
         request('streetName'), 
         request('streetNumber'), 

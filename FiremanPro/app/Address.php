@@ -30,7 +30,7 @@ class Address extends Model
         $address -> streetName = $streetName;
         $address -> streetNumber=$streetNumber;
         $address -> place = $place;
-        $address -> post_id = $post->id;
+        $address -> post_id = $post->postal_code;
         $address -> longitude = $longitude;
         $address -> latitude = $latitude;
         

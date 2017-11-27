@@ -128,35 +128,28 @@
                                     </div>
                                 </div>
                                 
-                                   <div class="form-group {{ $errors->has('postal_code') ? ' has-error' : '' }}">
-
-                                    <label for="postal_code" class="col-md-4 control-label">Broj pošte:  </label>
+                                
+                                   <div class="form-group {{ $errors->has('postal_code') ? ' has-error' : '' }} " >
+                                    <label class="col-md-4 control-label" for="postal_code">Pošta</label>
                                     <div class="col-md-6">
-                                        <input value="{{ old('postal_code') }}" name="postal_code" id="postal_code" type="numbeer" value="42208" class="form-control"   placeholder="10000" required="">
-                                        @if ($errors->has('postal_code'))
+                                        <select name="postal_code" id="power_supply" class="form-control" required="">
+                                            <option value="-1" disabled="" selected="">Odaberite..</option>
+                                            @foreach($posts as $post)
+                                            <option value="{{ $post -> postal_code }}">{{ $post -> name }}</option>
+                                           
+@endforeach
+                                        </select>
+                                        @if ($errors->has('power_supply'))
                                         <span class="help-block">
 
                                             <strong>{{ $errors->first('postal_code') }}</strong>
                                         </span>
                                         @endif
-
                                     </div>
                                 </div>
                                 
-                                   <div class="form-group {{ $errors->has('postal_name') ? ' has-error' : '' }}">
-
-                                    <label for="postal_name" class="col-md-4 control-label">Naziv pošte:  </label>
-                                    <div class="col-md-6">
-                                        <input value="{{ old('postal_name') }}" name="postal_name" id="postal_code" type="text" class="form-control"  value="Cestica" placeholder="npr. Cestica" required="">
-                                        @if ($errors->has('postal_name'))
-                                        <span class="help-block">
-
-                                            <strong>{{ $errors->first('postal_name') }}</strong>
-                                        </span>
-                                        @endif
-
-                                    </div>
-                                </div>
+                               
+                           
                                 
                                     <div class="form-group {{ $errors->has('longitude') ? ' has-error' : '' }}">
 
