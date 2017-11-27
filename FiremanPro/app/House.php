@@ -92,5 +92,46 @@ class House extends Model
         PhotoPhototypeHouse::addGndPlanPhoto($photo, $this);
        
     }
+    
+    
+    public function getAllGroundPlans(){
+        
+        $photos = PhotoPhototypeHouse::
+                
+                  leftJoin('photos', 'photo_phototype_houses.photo_id', '=', 'photos.id')
+                -> leftJoin('photo_types', 'photo_phototype_houses.photo_type_id', '=', 'photo_types.id')
+            ->select('photos.*')
+            ->where('photo_phototype_houses.photo_type_id','=','101')
+                 ->where('photo_phototype_houses.house_id','=', $this->id)
+        
+                    
+            ->get();
+        
+        return $photos;
+               
+        
+    }
+    
+      public function getProfilPic(){
+        
+        $photos = PhotoPhototypeHouse::
+                
+                  leftJoin('photos', 'photo_phototype_houses.photo_id', '=', 'photos.id')
+                -> leftJoin('photo_types', 'photo_phototype_houses.photo_type_id', '=', 'photo_types.id')
+            ->select('photos.*')
+            ->where('photo_phototype_houses.photo_type_id','=','100')
+                 ->where('photo_phototype_houses.house_id','=', $this->id)
+        
+                    
+            ->first();
+        
+        return $photos;
+               
+        
+    }
+    
+    
+    
+    
 
 }

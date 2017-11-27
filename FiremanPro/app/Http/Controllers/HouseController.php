@@ -106,4 +106,73 @@ return back();
 
   
     }
+    
+    
+    private function housesWithAddress(){
+           $houses = \App\House::
+                  leftJoin('addresses', 'addresses.id', '=', 'houses.address_id')
+            ->select('houses.*', 'houses.id as house_ID','addresses.*')
+                   
+                   ->get();
+           
+          // $houses = $houses->toArray();
+           
+            $kuca = new \App\House();
+            $housesRET = array();
+            
+           foreach ($houses as  $h) {
+               
+               $h = $h->toArray();
+               
+           //    \Symfony\Component\VarDumper\VarDumper::dump($h);
+        $kuca = \App\House::find($h['house_ID']);
+        
+       $sli['slike_planova'] = $kuca->getAllGroundPlans()->toArray();
+        $profil['profilPicture'] = $kuca->getProfilPic();
+      $result =  array_merge($h,$sli);
+      
+       $result =  array_merge($result ,$profil);
+     array_push($housesRET, $result);
+       
+      
+           // \Symfony\Component\VarDumper\VarDumper::dump($result);
+          
+            }
+           
+        
+           
+         return $housesRET;
+        
+        
+    }
+    
+    public function APIallEntries() {
+
+// If the Content-Type and Accept headers are set to 'application/json', 
+    // this will return a JSON structure. This will be cleaned up later.
+
+        
+       
+   // $address = \App\Address::all();//->toJson();
+    $house = $this->housesWithAddress();//\App\House::all();//->toJson();//App\House::all()->toJson();
+  //  $photo = \App\Photo::all();//->toJson();
+  //  $photoPhotoTypeHouses = \App\PhotoPhototypeHouse::all();//->toJson();
+    $photoType = \App\PhotoType::all();//->toJson();
+    $post = \App\Post::
+              select('posts.postal_code', 'posts.name')
+            ->get();//->toJson();
+
+    
+    
+
+
+    $c = array("housesWS" => $house,"photoTypeWS" => $photoType, "postWS" => $post);
+
+
+
+
+
+    return $c;
+}
+
 }
