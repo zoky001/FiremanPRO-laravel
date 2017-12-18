@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//use Intervention\Image\ImageManagerStatic as Image;
+
+use Intervention\Image\ImageManagerStatic;
 class HouseController extends Controller
 {
     //
@@ -13,7 +16,7 @@ class HouseController extends Controller
     
     
     
-     public function addNewHouse() {
+     public function addNewHouse(Request $request) {
 /*
         $messages = [
             'date' => 'Datum nije pravilnog oblika',
@@ -57,6 +60,29 @@ class HouseController extends Controller
 
        // echo request('postal_code');
         
+         
+  
+$image = $request->user_photo;
+  // get current time and append the upload file extension to it,
+  // then put that name to $photoName variable.
+  $photoName = time().'.'.$request->user_photo->getClientOriginalExtension();
+
+  /*
+  talk the select file and move it public directory and make avatars
+  folder if doesn't exsit then give it that unique name.
+  */
+  
+  $path = public_path('house_images/profil'.$photoName); 
+  
+ // $request->user_photo->move(public_path('avatars'), $photoName);
+  
+ //Image::configure(array('driver' => 'imagick'));
+ ImageManagerStatic::make($image->getRealPath())->resize(200, 200)->save($path);
+     
+     
+         
+       session()->flash('message','Uspješno promjenjena slika profila!!');
+
         
         $post = \App\Post::where('postal_code', '=', request('postal_code'))->firstOrFail();
         
@@ -96,7 +122,7 @@ $house = \App\House::addNewHouse(
         );
        
         
-        
+        $house->addProfilPhoto($photoName);
          
        
          
@@ -107,6 +133,15 @@ return back();
   
     }
     
+    public function showAllHouses() {
+        
+         $posts = \App\Post::all();
+         $houses = \App\House::all();
+        return view('allHouses',compact('houses'));
+        
+        
+    }
+    
     
     private function housesWithAddress(){
            $houses = \App\House::
@@ -114,6 +149,7 @@ return back();
             ->select('houses.*', 'houses.id as house_ID','addresses.*')
                    
                    ->get();
+           
            
           // $houses = $houses->toArray();
            
@@ -159,7 +195,7 @@ return back();
   //  $photoPhotoTypeHouses = \App\PhotoPhototypeHouse::all();//->toJson();
     $photoType = \App\PhotoType::all();//->toJson();
     $post = \App\Post::
-              select('posts.postal_code', 'posts.name')
+              select('posts.id', 'posts.name')
             ->get();//->toJson();
 
     

@@ -8,7 +8,7 @@
            <div class="w3-container w3-content " style="max-width:1500px;margin-top:40px">  
         <div class="w3-panel w3-round-xlarge w3-light-grey">
             <div class = "w3-center" style="margin-top:-10px">
-                <h1>Dodavanje nove kuće</h1>
+                <h1>Dodavanje nove kuće - UNOS</h1>
                 <!-- Add new user--button -->
             </div>  
 
@@ -39,8 +39,33 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Podatci o kući</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ Route('addNewHouse') }}" >
+                    
+                            
+                  
+
+                            <form class="form-horizontal" enctype="multipart/form-data" role="form" method="POST" action="{{ Route('addNewHouse') }}" >
                                 {{ csrf_field() }}
+                       
+                                    <div class="form-group">
+                                        
+                                  
+
+                                        <label for="ime" class="col-md-4 control-label"> Učitavanje slike profila kuće </label>
+                                        <div class="input-group col-md-6">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file">
+                                                    Dodaj… <input type="file" name="user_photo" id="imgInp" required="">
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                        <br>
+                                        <p class='w3-center'>
+                                            <img id='img-upload'/>
+                                        </p>  
+                                    </div>
+
+                                 
 
 
 

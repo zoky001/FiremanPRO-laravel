@@ -24,6 +24,7 @@ class Photo extends Model
         $photo = new Photo;
         $photo->ImageName = $imageName;
         $photo->FileName = $url;
+        $photo->url = asset('/house_images/profil'.$imageName);
        $photo->save();
        
        return $photo;

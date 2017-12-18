@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/house/new', 'HouseController@addNewHouse')->name('addNewHouse');
+Route::get('/house/all', 'HouseController@showAllHouses')->name('showAllHouses');

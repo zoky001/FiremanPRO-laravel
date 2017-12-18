@@ -65,7 +65,9 @@ class House extends Model
      
     }
     
-    public function addProfilPhoto(Photo $photo) {
+    public function addProfilPhoto($photoName) {
+        
+        $photo = Photo::addPhoto($photoName, $photoName);
         
         PhotoPhototypeHouse::addProfilPhoto($photo, $this);
        
@@ -124,6 +126,8 @@ class House extends Model
         
                     
             ->first();
+        
+        $photos -> url = asset("house_images/profil".$photos->FileName);
         
         return $photos;
                

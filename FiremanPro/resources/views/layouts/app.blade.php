@@ -11,7 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -37,6 +39,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                          @if (!Auth::guest())
+                        <li><a href="{{ route('showAllHouses') }}"> Popis kuca </a></li>
+                          <li><a href="{{ route('home') }}"> Unos kuce </a></li>
+                          @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -90,5 +96,85 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 </body>
+        <style>
+                                #flash-message{
+    position: fixed;
+    bottom:20px;
+    right: 20px;
+    z-index: 10;
+    height: 120px;
+    width: 400px;
+    
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    max-width: 50%;
+   
+    max-height: 250px;
+}
+                            </style>
+                            
+                                
+                                       <script>
+                            $(document).ready( function() {
+    	$(document).on('change', '.btn-file :file', function() {
+            console.log("promjena");
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
+
+		$('.btn-file :file').on('fileselect', function(event, label) {
+		     console.log("promjena");
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+		    
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+	    
+		});
+		function readURL(input) {
+                     console.log("promjena");
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+		        
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInp").change(function(){
+		    readURL(this);
+		}); 	
+	});
+                            </script>
 </html>
+
+                           
