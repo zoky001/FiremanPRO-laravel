@@ -35,6 +35,11 @@ class HomeController extends Controller
         */
         
         $posts = \App\Post::all();
-        return view('home',compact('posts'));
+        
+ 
+        
+     
+        
+       return view('home',compact('posts'));
     }
 }

@@ -67,7 +67,7 @@ class House extends Model
     
     public function addProfilPhoto($photoName) {
         
-        $photo = Photo::addPhoto($photoName, $photoName);
+        $photo = Photo::addPhoto($photoName, asset('/house_images/profil'.$photoName));
         
         PhotoPhototypeHouse::addProfilPhoto($photo, $this);
        
@@ -75,7 +75,7 @@ class House extends Model
     
      public function addProfilPhotoFullParametar($imageName, $url) {
         
-         $photo = Photo::addPhoto($imageName, $url);
+         $photo = Photo::addPhoto($imageName, asset('/house_images/profil'.$imageName));
          
         PhotoPhototypeHouse::addProfilPhoto($photo, $this);
        
@@ -87,8 +87,9 @@ class House extends Model
        
     }
     
-      public function addGndPlanPhotoFullParametar($imageName, $url) {
-        $photo = Photo::addPhoto($imageName, $url);
+      public function addGndPlanPhotoFullParametar($imageName) {
+          
+        $photo = Photo::addPhoto($imageName,asset('/house_images/gnd_plan'.$imageName));
         
         
         PhotoPhototypeHouse::addGndPlanPhoto($photo, $this);
@@ -109,6 +110,11 @@ class House extends Model
                     
             ->get();
         
+    foreach ($photos as $p) {
+        $p -> url = asset("house_images/gnd_plan".$p->FileName);
+        
+    }
+        
         return $photos;
                
         
@@ -128,7 +134,7 @@ class House extends Model
             ->first();
         
         $photos -> url = asset("house_images/profil".$photos->FileName);
-        
+    //    $photos -> url ="https://www.webgradnja.hr/images/katalog/popup/domprojekt-niskoenergetske-montazne-kuce-doris-prizemnica-s-potkrovljem-128-40-m-6584-1.jpg";
         return $photos;
                
         

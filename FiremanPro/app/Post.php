@@ -19,5 +19,10 @@ class Post extends Model
     }
     
     
+    public static function getPost(int $id){
+        return Post::find($id);  
+    }
+    
+    
     
 }

@@ -17,14 +17,15 @@ class Photo extends Model
         return $this->belongsToMany('App\PhotoType','photo_phototype_houses','photo_id','photo_type_id');
     }
     
-      public static function addPhoto($imageName, $url) {
+      public static function addPhoto($imageName, $url = "") {
 
        // $date = Carbon::createFromFormat('Y-m-d H:i', $date . ' ' . $time);
        
+          
         $photo = new Photo;
         $photo->ImageName = $imageName;
-        $photo->FileName = $url;
-        $photo->url = asset('/house_images/profil'.$imageName);
+        $photo->FileName = $imageName;
+        $photo->url = $url;
        $photo->save();
        
        return $photo;

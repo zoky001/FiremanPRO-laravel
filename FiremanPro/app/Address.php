@@ -21,16 +21,24 @@ class Address extends Model
     
 }
 
+        public function hydrant()
+{
+        
+    return $this->hasOne('App\Hydrant', 'address_id');
+    
+}
+
 
    public static function addAddress($streetName,$streetNumber,$place, Post $post, $longitude, $latitude) {
  
        // $date = Carbon::createFromFormat('Y-m-d H:i', $date . ' ' . $time);
        
+       
         $address = new Address();
         $address -> streetName = $streetName;
         $address -> streetNumber=$streetNumber;
         $address -> place = $place;
-        $address -> post_id = $post->postal_code;
+        $address -> post_id = $post->id;
         $address -> longitude = $longitude;
         $address -> latitude = $latitude;
         

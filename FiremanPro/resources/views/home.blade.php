@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<!---->
+<div class="container" ng-controller="enternewHouse">
     <div class="row">
      
         
@@ -160,7 +161,7 @@
                                         <select name="postal_code" id="power_supply" class="form-control" required="">
                                             <option value="-1" disabled="" selected="">Odaberite..</option>
                                             @foreach($posts as $post)
-                                            <option value="{{ $post -> postal_code }}">{{ $post -> name }}</option>
+                                            <option value="{{ $post -> id }}">{{ $post -> name }}</option>
                                            
 @endforeach
                                         </select>
@@ -663,9 +664,34 @@
 
                                     </div>
                                 </div>
-                           
-                             
+                                
+                                     <div class="form-group">
+                                        
+                                  
 
+                                        <label for="ime" class="col-md-4 control-label"> Učitavanje slike tlocrta kuće:  </label>
+                                        <div class="input-group col-md-6">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file">
+                                                    Dodaj… <input type="file" name="gnd_photo[]" id="imgInp" >
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                        <br>
+                                        <p class='w3-center'>
+                                            <img id='img-upload'/>
+                                        </p>  
+                                    </div>
+                                    
+                                
+                             
+                           <div class="inner"></div>
+                               
+                           <p  id = "addInput"  class="btn btn-success btn-lg centered" style="width: 50%;margin-left: 25%"> Učitaj još slika </p>
+                             
+                           <br>
+                           <br>
 
 
                                 <button type="submit" class="btn btn-primary btn-lg centered" style="width: 50%;margin-left: 25%">Pohrani podatke</button>

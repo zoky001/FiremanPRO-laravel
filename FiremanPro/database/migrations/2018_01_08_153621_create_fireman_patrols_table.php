@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHydrantsTable extends Migration
+class CreateFiremanPatrolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateHydrantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hydrants', function (Blueprint $table) {
+        Schema::create('fireman_patrols', function (Blueprint $table) {
             $table->increments('id');
             
-                        $table->string('type_of_hydrant');
-                        $table->text('description');
-
+            $table -> string('name');
+            
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateHydrantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hydrants');
+        Schema::dropIfExists('fireman_patrols');
     }
 }

@@ -13,9 +13,9 @@
     <!-- Styles -->
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+<!---->
 </head>
-<body>
+<body ng-app="firemanPRO">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -95,7 +95,15 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js">
+    
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/myApp.js') }}"></script>
+    <script src="{{ asset('js/myCtrl.js') }}"></script>
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 </body>
         <style>
