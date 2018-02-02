@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-var appFiremanPro = angular.module("firemanPRO",['ngSanitize'],  function($interpolateProvider) {
+var appFiremanPro = angular.module("firemanPRO",['ngSanitize','firebase'],  function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     });

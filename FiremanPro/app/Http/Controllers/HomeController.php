@@ -42,4 +42,10 @@ class HomeController extends Controller
         
        return view('home',compact('posts'));
     }
+    
+    
+    public function firestore() {
+            
+       return view('fireStore'); 
+    }
 }

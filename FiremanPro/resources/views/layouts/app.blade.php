@@ -105,6 +105,17 @@
     <script src="{{ asset('js/myApp.js') }}"></script>
     <script src="{{ asset('js/myCtrl.js') }}"></script>
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+           
+           
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         
+            
+            <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="{{ asset('js/fireStore.js') }}"></script>
+
 </body>
         <style>
                                 #flash-message{

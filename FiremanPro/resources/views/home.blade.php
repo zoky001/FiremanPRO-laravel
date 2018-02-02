@@ -143,7 +143,7 @@
 
                                     <label for="place" class="col-md-4 control-label">Selo:  </label>
                                     <div class="col-md-6">
-                                        <input value="{{ old('place') }}" name="place" id="place" type="text" class="form-control"   placeholder="16" >
+                                        <input value="{{ old('place') }}" name="place" id="place" type="text" class="form-control"   placeholder="Radovec" >
                                         @if ($errors->has('place'))
                                         <span class="help-block">
 
@@ -181,7 +181,7 @@
 
                                     <label for="longitude" class="col-md-4 control-label">Longitude:  </label>
                                     <div class="col-md-6">
-                                        <input value="{{ old('longitude') }}" name="longitude" id="longitude" type="numbeer" value="42208" class="form-control"   placeholder="46.000" required="">
+                                        <input value="{{ old('longitude') }}" name="longitude" id="longitude" type="numbeer" value="42208" class="form-control"   placeholder="16.000" required="">
                                         @if ($errors->has('longitude'))
                                         <span class="help-block">
 
@@ -196,7 +196,7 @@
 
                                     <label for="latitude" class="col-md-4 control-label">Latitude:  </label>
                                     <div class="col-md-6">
-                                        <input value="{{ old('latitude') }}" name="latitude" id="latitude" type="numbeer" value="42208" class="form-control"   placeholder="16.000" required="">
+                                        <input value="{{ old('latitude') }}" name="latitude" id="latitude" type="numbeer" value="42208" class="form-control"   placeholder="46.000"  required="">
                                         @if ($errors->has('latitude'))
                                         <span class="help-block">
 

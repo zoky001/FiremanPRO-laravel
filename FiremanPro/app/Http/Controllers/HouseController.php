@@ -115,8 +115,18 @@ class HouseController extends Controller {
     }
 
     public function showAllHouses() {
+        /*echo '<table>';
+        $array = \App\Type_of_unit::all();
+        
+        foreach ($array as $value) {
+            echo '<tr>';
+          
+            echo "<td>  " . $value->id . "  </td>";
+            echo "<td>  " . $value->name . "  </td>";
 
-
+            echo '</tr>';
+        }
+        echo '</table>';*/
         $posts = \App\Post::all();
         $houses = \App\House::all();
         return view('allHouses', compact('houses'));
@@ -165,7 +175,7 @@ class HouseController extends Controller {
 
         $patrols = \App\Fireman_patrol::
                 leftJoin('costs', 'fireman_patrols.id', '=', 'costs.fireman_patrol_id')
-                ->select('fireman_patrols.id as PATROL_ID' ,'fireman_patrols.*', 'costs.*')
+                ->select('fireman_patrols.id as PATROL_ID', 'fireman_patrols.*', 'costs.*')
                 ->get();
 
         // $houses = $houses->toArray();
@@ -173,20 +183,20 @@ class HouseController extends Controller {
         $kuca = new \App\Fireman_patrol();
         $housesRET = array();
 
-        foreach ( $patrols as $h) {
+        foreach ($patrols as $h) {
 
             $h = $h->toArray();
 
-        //   \Symfony\Component\VarDumper\VarDumper::dump($h);
-         //   $kuca = \App\House::find($h['house_ID']);
-$kuca = \App\Fireman_patrol::find($h['PATROL_ID']);
-           
-         //   \Symfony\Component\VarDumper\VarDumper::dump($kuca);
+            //   \Symfony\Component\VarDumper\VarDumper::dump($h);
+            //   $kuca = \App\House::find($h['house_ID']);
+            $kuca = \App\Fireman_patrol::find($h['PATROL_ID']);
+
+            //   \Symfony\Component\VarDumper\VarDumper::dump($kuca);
             $profil['trucks'] = $kuca->getAllTrucks()->toarray();
-            
-             // \Symfony\Component\VarDumper\VarDumper::dump($profil['fireman']);
-            
-             $sli['firemans'] = $kuca->getAllFiremans()->toarray();
+
+            // \Symfony\Component\VarDumper\VarDumper::dump($profil['fireman']);
+
+            $sli['firemans'] = $kuca->getAllFiremans()->toarray();
             $result = array_merge($h, $sli);
 
             $result = array_merge($result, $profil);
@@ -256,7 +266,7 @@ $kuca = \App\Fireman_patrol::find($h['PATROL_ID']);
                 ->get();
 
         $patr = $this->patrolsWithAll();
-     
+
         $c = array(
             "housesWS" => $house,
             "photoTypeWS" => $photoType,
@@ -271,7 +281,7 @@ $kuca = \App\Fireman_patrol::find($h['PATROL_ID']);
             "type_of_truckWS" => $type_of_truck,
             "type_of_unitWS" => $type_of_units,
             "hydrants" => $hydrants,
-            "patrolsWS" =>$patr
+            "patrolsWS" => $patr
         );
 
 
