@@ -46,6 +46,6 @@ class HomeController extends Controller
     
     public function firestore() {
             
-       return view('fireStore'); 
+       return view('firestore.home'); 
     }
 }

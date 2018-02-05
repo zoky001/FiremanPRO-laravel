@@ -13,6 +13,7 @@
     <!-- Styles -->
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <link rel="manifest" href="{{ asset('js//manifest.json') }}">
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/2.5.1/firebase-ui-auth.css" />
 <!---->
@@ -41,42 +42,30 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                          @if (!Auth::guest())
-                        <li><a href="{{ route('showAllHouses') }}"> Popis kuca </a></li>
-                          <li><a href="{{ route('home') }}"> Unos kuce </a></li>
-                          @endif
+                         
+                        <li><a class="auth" href=""> Popis kuca </a></li>
+                        <li><a class="auth" href="{{Route('newHouse')}}"> Unos kuce </a></li>
+                      
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         
-                   
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                       
+
+                     
+                        <li><a class="sign-in" href="" id="sign-in" ></a></li>
+                        <li class="dropdown auth hidden">
+                            <a id="userName" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                 <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a id="sign-in"> </a>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
+                                    <li><a class="sign-in"href="" id="sign-in"> </a></li>
                                 </ul>
                             </li>
-                        @endif
+                      
                     </ul>
                 </div>
             </div>
@@ -106,23 +95,28 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js">
     
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/myApp.js') }}"></script>
-    <script src="{{ asset('js/myCtrl.js') }}"></script>
+
+  <script src="{{ asset('js/app.js') }}"></script>
+  
+
+
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
            
            
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
          
           
-            <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+           <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+        
+           
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>  
 <script src="https://www.gstatic.com/firebasejs/ui/2.5.1/firebase-ui-auth__hr.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-messaging.js"></script>
 <!--
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-messaging.js"></script>
+
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
         
 <!-- Leave out Storage -->
@@ -131,7 +125,9 @@
 <!-- AngularFire -->
 <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="{{ asset('js/fireStore.js') }}"></script>
-
+  <script src="{{ asset('js/firebaseMessage.js') }}"></script>
+    <script src="{{ asset('js/myApp.js') }}"></script>
+    <script src="{{ asset('js/myCtrl.js') }}"></script>
 </body>
         <style>
                                 #flash-message{

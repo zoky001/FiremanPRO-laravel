@@ -22,4 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/house/new', 'HouseController@addNewHouse')->name('addNewHouse');
 Route::get('/house/all', 'HouseController@showAllHouses')->name('showAllHouses');
 
-Route::get('/firestore', 'HomeController@firestore')->name('firestore');
+Route::get('/firestore/', 'FirestoreController@home')->name('firestore');
+
+Route::get('/firestore/login', 'FirestoreController@login')->name('firestore_login');
+
+Route::get('/firestore/newHouse', 'FirestoreController@newHouse')->name('newHouse');
