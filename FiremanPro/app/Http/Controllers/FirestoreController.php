@@ -26,5 +26,15 @@ class FirestoreController extends Controller
        return view('firestore.insert_house'); 
     }
     
+          public function newIntervention() {
+            
+       return view('firestore.intervention'); 
+    }
+    
+         public function currentIntervention($id) {
+            
+       return view('firestore.currentIntervention',compact('id')); 
+    }
+    
     
 }

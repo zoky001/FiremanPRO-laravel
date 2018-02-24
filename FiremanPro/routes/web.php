@@ -27,3 +27,7 @@ Route::get('/firestore/', 'FirestoreController@home')->name('firestore');
 Route::get('/firestore/login', 'FirestoreController@login')->name('firestore_login');
 
 Route::get('/firestore/newHouse', 'FirestoreController@newHouse')->name('newHouse');
+
+Route::get('/firestore/newIntervention', 'FirestoreController@newIntervention')->name('newIntervention');
+
+Route::get('/firestore/currentIntervention/{id}', 'FirestoreController@currentIntervention')->name('currentIntervention');

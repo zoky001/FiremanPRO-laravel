@@ -45,7 +45,10 @@
                          
                         <li><a class="auth" href=""> Popis kuca </a></li>
                         <li><a class="auth" href="{{Route('newHouse')}}"> Unos kuce </a></li>
-                      
+                       <li><a class="auth" href="{{Route('newIntervention')}}"> Intervencija</a></li>
+                   
+                    
+                    
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -112,6 +115,10 @@
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>  
 <script src="https://www.gstatic.com/firebasejs/ui/2.5.1/firebase-ui-auth__hr.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-messaging.js"></script>
+
+
+  <script src="{{ asset('js/googleMap.js') }}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhrH-2ADB3_rhv9JlkSUfqY4ra_vNXPPI&callback=myMap"></script>
 <!--
 
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>

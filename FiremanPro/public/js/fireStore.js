@@ -14,13 +14,17 @@ firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
 var postsCollectionRef = db.collection("posts");
-
+var interventionCollectionRef = db.collection("intervention_track");
+var housesCollectionRef = db.collection("houses");
+var patrolCollectionRef = db.collection("fireman_Patrol");
 function IDunique() {
   // Math.random should be unique because of its seeding algorithm.
   // Convert it to base 36 (numbers + letters), and grab the first 9 characters
   // after the decimal.
   return Math.random().toString(36).substr(2, 9)+'_';
 };
+
+
 db.collection("fireman_Patrol")
         .onSnapshot(function (querySnapshot) {
             $("#bik").empty();

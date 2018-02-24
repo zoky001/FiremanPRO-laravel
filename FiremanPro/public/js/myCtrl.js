@@ -29,19 +29,266 @@ appFiremanPro.controller('enternewHouse', function ($scope, $http) {
         var imagesGNDRef = storageRef.child('images').child('gnd_plan_pic');
         // File or Blob named mountains.jpg
         var file = $('#imgInp')[0].files[0];
-      uploadImageToFirebaseStorage(imagesRef, file);
-      
-      
-     var $mvar = $('.gnd_photo')
+        uploadImageToFirebaseStorage(imagesRef, file);
+
+
+        var $mvar = $('.gnd_photo')
         console.log("FILEE: " + $mvar.length);//.files[0]);
-         for (i=0; i<$mvar.length; i++)    {
-                
-                  console.log("FILEE: " + $('.gnd_photo')[i].files[0]);//.files[0]);
-                     uploadImageToFirebaseStorage(imagesGNDRef, $('.gnd_photo')[i].files[0]);
-            }
-       
+        for (i = 0; i < $mvar.length; i++) {
+
+            console.log("FILEE: " + $('.gnd_photo')[i].files[0]);//.files[0]);
+            uploadImageToFirebaseStorage(imagesGNDRef, $('.gnd_photo')[i].files[0]);
+        }
+
     }
 
+
+});
+
+appFiremanPro.controller('intervention', function ($scope, $http) {
+    fillWithHouses();
+
+    /* interventionCollectionRef.add({
+     Name: ime,
+     Type: prezime
+     })
+     .then(function (docRef) {
+     console.log("Document written with ID: ", docRef.id);
+     })
+     .catch(function (error) {
+     console.error("Error adding document: ", error);
+     });
+     */
+
+
+
+    function startIntervention(id_house) {
+        console.log("START: " + id_house);
+
+
+        var data = {
+
+            house: housesCollectionRef.doc(id_house),
+
+        };
+
+// Add a new document in collection "cities" with ID 'LA'
+        interventionCollectionRef.add(
+                data
+                )
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    fillWithPatrol(docRef.id);
+
+
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                });
+
+
+
+
+
+    }
+    ;
+
+    function callPatrolToIntervention(notification_id, intervention_id) {
+        sendFirebaseNotification(notification_id, intervention_id);
+
+
+
+
+
+    }
+
+    function sendFirebaseNotification(notification_id, id) {
+
+        console.log(notification_id);
+        var config = {
+            headers: {
+                'Authorization': 'key=AAAAmrEEZok:APA91bHcHeCY-sTl6Tft4IL9ElaBV07IefQCsB6CGLkNFYViA6uZpCAeUnCwFW0oCi1D3TTehv5WAS__t73SmV5ywQlsVKb36XphGb57pXUE4ufnF84jL0vFBTJk94fdUQQWymUjxaWc',
+                'Content-Type': 'application/json'
+            }
+        }
+
+        var data = {
+            "notification": {
+                "title": "Intervencija!!!",
+                "body": id,
+                "icon": "https://rtl-cdnstatic.r.worldssl.net/image/1a630558ebc60967f71e402def2f4079_view_article_new.jpg?v=20",
+                //  "click_action": "http://127.0.0.1:8000/firestore"
+            },
+            "to": notification_id
+
+        };
+        $http.post("https://fcm.googleapis.com/fcm/send", data, config)
+                .then(function mySuccess(response) {
+                    console.log('uspjeh' + response.data);
+                    window.location.href = 'http://127.0.0.1:8000/firestore/currentIntervention/' + id;
+                }, function myError(response) {
+                    console.log('greška' + response.data);
+
+                });
+
+        /*   $http({
+         method: 'POST',
+         url: fcm.googleapis.com / fcm / send,
+         data: incidentInformation,
+         timeout: 4000
+         }).then(function (success) {
+         callback(success);
+         }, function (error) {
+         errorCallback(error);
+         });
+         */
+    }
+
+    function fillWithPatrol(intervention_id) {
+
+        console.log("fill patrol ");
+
+        patrolCollectionRef//.where("capital", "==", true)
+                .get()
+                .then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        // doc.data() is never undefined for query doc snapshots
+                        // console.log(doc.id, " => ", doc.data());
+                        $("#listPatrol").append("<li class='list-group-item '>" + doc.data().Type + "  " + doc.data().Name + "<span  id='" + doc.data().notification_key + "'class='badge sendToPatrol'>Pošalji poziv</span></li>");
+
+                        console.log("fill patrol item");
+
+
+
+                    });
+
+                    showListPatrol();
+                    $(".sendToPatrol").click(function () {
+                        console.log("THISSS: ", this.id);
+                        callPatrolToIntervention(this.id, intervention_id);
+
+                    });
+                })
+                .catch(function (error) {
+                    console.log("Error getting documents: ", error);
+                });
+
+    }
+    ;
+
+    function showListPatrol() {
+
+        $("#patrolListDiv").removeClass("hidden");
+        $("#patrolListDiv").show();
+        console.log("show");
+    }
+    function fillWithHouses() {
+
+
+
+        housesCollectionRef//.where("capital", "==", true)
+                .get()
+                .then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        // doc.data() is never undefined for query doc snapshots
+                        // console.log(doc.id, " => ", doc.data());
+                        $("#listHouses").append("<li class='list-group-item '>" + doc.data().address.streetName + "  " + doc.data().address.streetNumber + "<span  id='" + doc.id + "'class='badge dodajIntervenciju'>Zapocni intervenciju</span></li>");
+
+
+
+
+
+                    });
+
+                    $(".dodajIntervenciju").click(function () {
+                        console.log("THISSS: ", this.id);
+                        startIntervention(this.id);
+
+                    });
+                })
+                .catch(function (error) {
+                    console.log("Error getting documents: ", error);
+                });
+
+    }
+    ;
+});
+appFiremanPro.controller('currrentIntervention', function ($scope, $http) {
+
+    var vm = this;
+
+
+    var IDintervencije = $("#IDintervencije").val();
+    console.log("ID intervencije" + IDintervencije);
+
+
+    interventionCollectionRef.doc(IDintervencije).get().then(function (doc) {
+        if (doc.exists) {
+
+            getHouseAtIntervention(doc.data().house);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error);
+    });
+
+var noSnap = 0;
+    interventionCollectionRef.doc(IDintervencije)
+            .onSnapshot(function (doc) {
+                console.log("Current data snapshot: ", doc.data());
+                if (noSnap != 0) {
+                      alert("Priključila se nova postrojba!!");
+          setMarker(doc.data().longitude, doc.data().latitude);
+                }
+                noSnap++;
+      
+        
+
+
+
+            });
+
+
+
+    function getHouseAtIntervention(ref) {
+        var docRef = db.collection("cities")
+
+        ref.get().then(function (doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                setHouseData(doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function (error) {
+            console.log("Error getting document:", error);
+        });
+
+    }
+
+
+
+    function  setHouseData(houseData) {
+        $("#ownerName").text(houseData.name_owner + " " + houseData.surname_owner);
+        $scope.owner = houseData.nameOwner + " " + houseData.surnameOwner;
+        $scope.owner = "konkj";
+        console.log($scope.owner);
+        initMapAtHouse(houseData.address.latitude, houseData.address.longitude);
+        setMarker(houseData.address.latitude, houseData.address.longitude);
+        
+         /*   var mapCanvas = document.getElementById("map");
+    var mapOptions = {
+        center: new google.maps.LatLng(46.363101, 16.130054),
+        zoom: 18,
+          mapTypeId:google.maps.MapTypeId.HYBRID
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);*/
+
+  
+    }
 
 });
 
@@ -122,7 +369,7 @@ function uploadImageToFirebaseStorage(imagesRef, file) {
     };
 
 // Upload file and metadata to the object 'images/mountains.jpg'
-    var uploadTask = imagesRef.child(IDunique()+file.name).put(file, metadata);
+    var uploadTask = imagesRef.child(IDunique() + file.name).put(file, metadata);
 
 // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
