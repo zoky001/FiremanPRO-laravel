@@ -13,7 +13,7 @@ class FirestoreController extends Controller
     public function login(){
         
         
-         return view('fireStore.login'); 
+         return view('firestore.login'); 
     }
     
       public function home() {
