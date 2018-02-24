@@ -154,7 +154,7 @@ checkAuth();
                 });
 
             } else {
-                window.location.replace("http://127.0.0.1:8000/firestore/login");
+                window.location.replace("https://immense-journey-10021.herokuapp.com//firestore/login");
 
 
             }
@@ -192,8 +192,8 @@ function checkAuth() {
                 // User is signed in.
            
             } else {
-                if($(location).attr('href') != "http://127.0.0.1:8000/firestore/login")
-                window.location.replace("http://127.0.0.1:8000/firestore/login");
+                if($(location).attr('href') != "https://immense-journey-10021.herokuapp.com/firestore/login")
+                window.location.replace("https://immense-journey-10021.herokuapp.com/firestore/login");
             }
         }, function (error) {
             console.log(error);
