@@ -118,7 +118,7 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
         $http.post("https://fcm.googleapis.com/fcm/send", data, config)
             .then(function mySuccess(response) {
                 console.log('uspjeh' + response.data);
-                window.location.href = 'http://127.0.0.1:8000/firestore/currentIntervention/' + id;
+                window.location.href = URLaddress+'/firestore/currentIntervention/' + id;
             }, function myError(response) {
                 console.log('greška' + response.data);
 
