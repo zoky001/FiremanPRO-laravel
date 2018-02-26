@@ -61,7 +61,6 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
      */
 
 
-
     function startIntervention(id_house) {
         console.log("START: " + id_house);
 
@@ -74,20 +73,17 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
 
 // Add a new document in collection "cities" with ID 'LA'
         interventionCollectionRef.add(
-                data
-                )
-                .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                    fillWithPatrol(docRef.id);
+            data
+        )
+            .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+                fillWithPatrol(docRef.id);
 
 
-                })
-                .catch(function (error) {
-                    console.error("Error adding document: ", error);
-                });
-
-
-
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
 
 
     }
@@ -95,9 +91,6 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
 
     function callPatrolToIntervention(notification_id, intervention_id) {
         sendFirebaseNotification(notification_id, intervention_id);
-
-
-
 
 
     }
@@ -123,13 +116,13 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
 
         };
         $http.post("https://fcm.googleapis.com/fcm/send", data, config)
-                .then(function mySuccess(response) {
-                    console.log('uspjeh' + response.data);
-                    window.location.href = 'http://127.0.0.1:8000/firestore/currentIntervention/' + id;
-                }, function myError(response) {
-                    console.log('greška' + response.data);
+            .then(function mySuccess(response) {
+                console.log('uspjeh' + response.data);
+                window.location.href = 'http://127.0.0.1:8000/firestore/currentIntervention/' + id;
+            }, function myError(response) {
+                console.log('greška' + response.data);
 
-                });
+            });
 
         /*   $http({
          method: 'POST',
@@ -149,29 +142,28 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
         console.log("fill patrol ");
 
         patrolCollectionRef//.where("capital", "==", true)
-                .get()
-                .then(function (querySnapshot) {
-                    querySnapshot.forEach(function (doc) {
-                        // doc.data() is never undefined for query doc snapshots
-                        // console.log(doc.id, " => ", doc.data());
-                        $("#listPatrol").append("<li class='list-group-item '>" + doc.data().Type + "  " + doc.data().Name + "<span  id='" + doc.data().notification_key + "'class='badge sendToPatrol'>Pošalji poziv</span></li>");
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    // console.log(doc.id, " => ", doc.data());
+                    $("#listPatrol").append("<li class='list-group-item '>" + doc.data().Type + "  " + doc.data().Name + "<span  id='" + doc.data().notification_key + "'class='badge sendToPatrol'>Pošalji poziv</span></li>");
 
-                        console.log("fill patrol item");
+                    console.log("fill patrol item");
 
 
-
-                    });
-
-                    showListPatrol();
-                    $(".sendToPatrol").click(function () {
-                        console.log("THISSS: ", this.id);
-                        callPatrolToIntervention(this.id, intervention_id);
-
-                    });
-                })
-                .catch(function (error) {
-                    console.log("Error getting documents: ", error);
                 });
+
+                showListPatrol();
+                $(".sendToPatrol").click(function () {
+                    console.log("THISSS: ", this.id);
+                    callPatrolToIntervention(this.id, intervention_id);
+
+                });
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+            });
 
     }
     ;
@@ -182,33 +174,30 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
         $("#patrolListDiv").show();
         console.log("show");
     }
+
     function fillWithHouses() {
 
 
-
         housesCollectionRef//.where("capital", "==", true)
-                .get()
-                .then(function (querySnapshot) {
-                    querySnapshot.forEach(function (doc) {
-                        // doc.data() is never undefined for query doc snapshots
-                        // console.log(doc.id, " => ", doc.data());
-                        $("#listHouses").append("<li class='list-group-item '>" + doc.data().address.streetName + "  " + doc.data().address.streetNumber + "<span  id='" + doc.id + "'class='badge dodajIntervenciju'>Zapocni intervenciju</span></li>");
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    // console.log(doc.id, " => ", doc.data());
+                    $("#listHouses").append("<li class='list-group-item '>" + doc.data().address.streetName + "  " + doc.data().address.streetNumber + "<span  id='" + doc.id + "'class='badge dodajIntervenciju'>Zapocni intervenciju</span></li>");
 
 
-
-
-
-                    });
-
-                    $(".dodajIntervenciju").click(function () {
-                        console.log("THISSS: ", this.id);
-                        startIntervention(this.id);
-
-                    });
-                })
-                .catch(function (error) {
-                    console.log("Error getting documents: ", error);
                 });
+
+                $(".dodajIntervenciju").click(function () {
+                    console.log("THISSS: ", this.id);
+                    startIntervention(this.id);
+
+                });
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+            });
 
     }
     ;
@@ -234,22 +223,18 @@ appFiremanPro.controller('currrentIntervention', function ($scope, $http) {
         console.log("Error getting document:", error);
     });
 
-var noSnap = 0;
+    var noSnap = 0;
     interventionCollectionRef.doc(IDintervencije)
-            .onSnapshot(function (doc) {
-                console.log("Current data snapshot: ", doc.data());
-                if (noSnap != 0) {
-                      alert("Priključila se nova postrojba!!");
-          setMarker(doc.data().longitude, doc.data().latitude);
-                }
-                noSnap++;
-      
-        
+        .onSnapshot(function (doc) {
+            console.log("Current data snapshot: ", doc.data());
+            if (noSnap != 0) {
+                alert("Priključila se nova postrojba!!");
+                setMarker(doc.data().longitude, doc.data().latitude);
+            }
+            noSnap++;
 
 
-
-            });
-
+        });
 
 
     function getHouseAtIntervention(ref) {
@@ -270,24 +255,23 @@ var noSnap = 0;
     }
 
 
-
-    function  setHouseData(houseData) {
+    function setHouseData(houseData) {
         $("#ownerName").text(houseData.name_owner + " " + houseData.surname_owner);
         $scope.owner = houseData.nameOwner + " " + houseData.surnameOwner;
         $scope.owner = "konkj";
         console.log($scope.owner);
         initMapAtHouse(houseData.address.latitude, houseData.address.longitude);
         setMarker(houseData.address.latitude, houseData.address.longitude);
-        
-         /*   var mapCanvas = document.getElementById("map");
-    var mapOptions = {
-        center: new google.maps.LatLng(46.363101, 16.130054),
-        zoom: 18,
-          mapTypeId:google.maps.MapTypeId.HYBRID
-    };
-    var map = new google.maps.Map(mapCanvas, mapOptions);*/
 
-  
+        /*   var mapCanvas = document.getElementById("map");
+   var mapOptions = {
+       center: new google.maps.LatLng(46.363101, 16.130054),
+       zoom: 18,
+         mapTypeId:google.maps.MapTypeId.HYBRID
+   };
+   var map = new google.maps.Map(mapCanvas, mapOptions);*/
+
+
     }
 
 });
@@ -319,9 +303,6 @@ appFiremanPro.controller('login', function ($scope, $http) {
     ui.start('#firebaseui-auth-container', uiConfig);
 
 
-
-
-
 });
 
 //JQuery
@@ -337,27 +318,25 @@ appFiremanPro.controller('customersCtrl', function ($scope, $http) {
     $scope.names = "KONJR";
 
 
-
-
-
 });
 
 
 function fillPostListbox() {
     postsCollectionRef//.where("capital", "==", true)
-            .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
-                    $("#postList").append("<option value=\"" + doc.id + "\" >" + doc.data().Name + "</option>");
-                });
-            })
-            .catch(function (error) {
-                console.log("Error getting documents: ", error);
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                $("#postList").append("<option value=\"" + doc.id + "\" >" + doc.data().Name + "</option>");
             });
+        })
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+        });
 
 }
+
 function uploadImageToFirebaseStorage(imagesRef, file) {
     // Get a reference to the storage service, which is used to create references in your storage bucket
 
@@ -373,45 +352,45 @@ function uploadImageToFirebaseStorage(imagesRef, file) {
 
 // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-            function (snapshot) {
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log('Upload is ' + progress + '% done');
-                switch (snapshot.state) {
-                    case firebase.storage.TaskState.PAUSED: // or 'paused'
-                        console.log('Upload is paused');
-                        break;
-                    case firebase.storage.TaskState.RUNNING: // or 'running'
-                        console.log('Upload is running');
-                        break;
-                }
-            }, function (error) {
+        function (snapshot) {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    console.log('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    console.log('Upload is running');
+                    break;
+            }
+        }, function (error) {
 
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-            case 'storage/unauthorized':
-                // User doesn't have permission to access the object
-                break;
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    break;
 
-            case 'storage/canceled':
-                // User canceled the upload
-                break;
+                case 'storage/canceled':
+                    // User canceled the upload
+                    break;
 
 
-            case 'storage/unknown':
-                // Unknown error occurred, inspect error.serverResponse
-                break;
-        }
-    }, function () {
-        // Upload completed successfully, now we can get the download URL
-        var downloadURL = uploadTask.snapshot.downloadURL;
-        console.log("LINK:" + downloadURL);
-    });
-
+                case 'storage/unknown':
+                    // Unknown error occurred, inspect error.serverResponse
+                    break;
+            }
+        }, function () {
+            // Upload completed successfully, now we can get the download URL
+            var downloadURL = uploadTask.snapshot.downloadURL;
+            console.log("LINK:" + downloadURL);
+        });
 
 
 }
+
 /*
  domMyHome.controller('Accounts', function ($scope, $http, $parse) {
  

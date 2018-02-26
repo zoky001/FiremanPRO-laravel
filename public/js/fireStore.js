@@ -1,3 +1,5 @@
+//current URL address
+var URLaddress = $("meta[property='URL']").attr('content');
 
 // Initialize Firebase
 var config = {
@@ -17,36 +19,36 @@ var postsCollectionRef = db.collection("posts");
 var interventionCollectionRef = db.collection("intervention_track");
 var housesCollectionRef = db.collection("houses");
 var patrolCollectionRef = db.collection("fireman_Patrol");
+
 function IDunique() {
-  // Math.random should be unique because of its seeding algorithm.
-  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-  // after the decimal.
-  return Math.random().toString(36).substr(2, 9)+'_';
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return Math.random().toString(36).substr(2, 9) + '_';
 };
 
 
 db.collection("fireman_Patrol")
-        .onSnapshot(function (querySnapshot) {
-            $("#bik").empty();
-            var cities = [];
-            querySnapshot.forEach(function (doc) {
-                cities.push(doc.data().Name);
-                $("#bik").append(
-                        " <li class='list-group-item '>" + doc.data().Name + "<span id='" + doc.id + "'class='badge brisi_item'>BRISI</span></li>"
-                        );
-                $(".brisi_item").click(function () {
-                    console.log("THISSS: ", this.id);
-                    brisanjeItema(this.id);
+    .onSnapshot(function (querySnapshot) {
+        $("#bik").empty();
+        var cities = [];
+        querySnapshot.forEach(function (doc) {
+            cities.push(doc.data().Name);
+            $("#bik").append(
+                " <li class='list-group-item '>" + doc.data().Name + "<span id='" + doc.id + "'class='badge brisi_item'>BRISI</span></li>"
+            );
+            $(".brisi_item").click(function () {
+                console.log("THISSS: ", this.id);
+                brisanjeItema(this.id);
 
-
-
-                });
 
             });
 
-            //document.getElementById("bik").innerHTML = cities[0];
-
         });
+
+        //document.getElementById("bik").innerHTML = cities[0];
+
+    });
 /*
 //firebase AUTH
 // FirebaseUI config.
@@ -74,10 +76,10 @@ initApp = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-            
+
             //show
-            $( ".auth" ).removeClass( "hidden" );
-           
+            $(".auth").removeClass("hidden");
+
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -85,13 +87,13 @@ initApp = function () {
             var uid = user.uid;
             var phoneNumber = user.phoneNumber;
             var providerData = user.providerData;
-            
-             $("#userName").text(email);
-             $("#userName").append("<span class=\"caret\"></span>");
-             
+
+            $("#userName").text(email);
+            $("#userName").append("<span class=\"caret\"></span>");
+
             user.getIdToken().then(function (accessToken) {
                 //  document.getElementById('sign-in-status').textContent = 'Signed in';
-              
+
                 $(".sign-in").text("Odjava");
                 /*
                 document.getElementById('account-details').textContent = JSON.stringify({
@@ -107,11 +109,11 @@ initApp = function () {
             });
         } else {
             //show
-            $( ".auth" ).addClass( "hidden" );
+            $(".auth").addClass("hidden");
             // User is signed out.
             // document.getElementById('sign-in-status').textContent = 'Signed out';
- $(".sign-in").text("Prijava");
- // document.getElementById('account-details').textContent = 'null';
+            $(".sign-in").text("Prijava");
+            // document.getElementById('account-details').textContent = 'null';
         }
     }, function (error) {
         console.log(error);
@@ -120,7 +122,7 @@ initApp = function () {
 
 
 $(document).ready(function () {
-checkAuth();
+    checkAuth();
     initApp();
     $("#salji").click(function () {
         ime = $("#ime").val();
@@ -130,15 +132,14 @@ checkAuth();
             Name: ime,
             Type: prezime
         })
-                .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                })
-                .catch(function (error) {
-                    console.error("Error adding document: ", error);
-                });
+            .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
 
     });
-
 
 
     $("#sign-in").click(function () {
@@ -154,7 +155,7 @@ checkAuth();
                 });
 
             } else {
-                window.location.replace("https://immense-journey-10021.herokuapp.com//firestore/login");
+                window.location.replace(URLaddress+"/firestore/login");
 
 
             }
@@ -163,12 +164,8 @@ checkAuth();
         });
     });
 
- 
-
 
 });
-
-
 
 
 function brisanjeItema(id) {
@@ -187,17 +184,22 @@ function brisanjeItema(id) {
 
 function checkAuth() {
     console.log("provjera identiteta");
-   firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                // User is signed in.
-           
-            } else {
-                if($(location).attr('href') != "https://immense-journey-10021.herokuapp.com/firestore/login")
-                window.location.replace("https://immense-journey-10021.herokuapp.com/firestore/login");
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+
+        } else {
+
+            console.log("URL adresa je: " + URLaddress);
+
+            if ($(location).attr('href') != URLaddress+"/firestore/login")
+            {
+              ///  window.location.replace(URLaddress+"/firestore/login");
             }
-        }, function (error) {
-            console.log(error);
-        });
+        }
+    }, function (error) {
+        console.log(error);
+    });
 
     // The function returns the product of p1 and p2
 };
