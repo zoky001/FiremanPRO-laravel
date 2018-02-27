@@ -118,7 +118,7 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
         $http.post("https://fcm.googleapis.com/fcm/send", data, config)
             .then(function mySuccess(response) {
                 console.log('uspjeh' + response.data);
-                window.location.href = URLaddress+'/firestore/currentIntervention/' + id;
+                window.location.href = URLaddress + '/firestore/currentIntervention/' + id;
             }, function myError(response) {
                 console.log('greška' + response.data);
 
@@ -224,18 +224,68 @@ appFiremanPro.controller('currrentIntervention', function ($scope, $http) {
     });
 
     var noSnap = 0;
-    interventionCollectionRef.doc(IDintervencije)
-        .onSnapshot(function (doc) {
-            console.log("Current data snapshot: ", doc.data());
-            if (noSnap != 0) {
-                alert("Priključila se nova postrojba!!");
-                setMarker(doc.data().longitude, doc.data().latitude);
-            }
-            noSnap++;
+
+    function fillWithPatrol(doc) {
+
+        console.log("fill patrol ");
+        $("#listPatrol").append("<li id = '" + doc.data().fireman_id + "'class='list-group-item '>" + doc.data().fireman_id + "<br><p class='text-success'> <b>" + doc.data().status + "</b></p></li>");
+
+        console.log("fill patrol item");
+
+        showListPatrol();
+        return doc.data().fireman_id;
+
+    };
+
+    function showListPatrol() {
+
+        $("#patrolListDiv").removeClass("hidden");
+        $("#patrolListDiv").show();
+        console.log("show");
+    }
+
+    function emptyListPatrol() {
 
 
+        $("#listPatrol").empty();
+        console.log("show");
+    }
+    function setNewPatrolListener() {
+        interventionCollectionRef.doc(IDintervencije).collection("firemans")
+            .onSnapshot(function (querySnapshot) {
+                emptyListPatrol();
+                deleteMarkers();
+                querySnapshot.forEach(function (doc) {
+                    // alert("Priključila se nova postrojba!!" + doc.data().longitude);
+                    var fir_list_id = fillWithPatrol(doc);
+                   var mar = setFiremanMarker(doc.data().longitude, doc.data().latitude);
+                    firemans_markers.push(mar);
+                 //  setOneFiremanListener(doc);
+
+                });
+
+            });
+
+    }
+
+    function setOneFiremanListener(doc_id, marker) {
+     //   console.log("set marker:  " + long + " " + lat);
+     /*   var myCenter = new google.maps.LatLng(long, lat);
+        var marker = new google.maps.Marker({
+            position: myCenter,
+            animation: google.maps.Animation.BOUNCE,
+            //icon: "pinkball.png"
         });
 
+*/
+        interventionCollectionRef.doc(IDintervencije).collection("firemans").doc(doc_id)
+            .onSnapshot(function(doc) {
+                fillWithPatrol(doc);
+                console.log(" data: "+ doc.data());
+            });
+
+
+    }
 
     function getHouseAtIntervention(ref) {
         var docRef = db.collection("cities")
@@ -262,6 +312,7 @@ appFiremanPro.controller('currrentIntervention', function ($scope, $http) {
         console.log($scope.owner);
         initMapAtHouse(houseData.address.latitude, houseData.address.longitude);
         setMarker(houseData.address.latitude, houseData.address.longitude);
+        setNewPatrolListener();
 
         /*   var mapCanvas = document.getElementById("map");
    var mapOptions = {
