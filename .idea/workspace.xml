@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f24c0742-d52a-48a6-a8f0-664ffe237d0c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/public/js/googleMap.js" afterPath="$PROJECT_DIR$/public/js/googleMap.js" />
-      <change beforePath="$PROJECT_DIR$/public/js/myCtrl.js" afterPath="$PROJECT_DIR$/public/js/myCtrl.js" />
-      <change beforePath="$PROJECT_DIR$/resources/views/firestore/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/firestore/app.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -121,8 +117,8 @@
       <file leaf-file-name=".env" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+            <state relative-caret-position="168">
+              <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -235,7 +231,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="232" />
     <option name="y" value="189" />
     <option name="width" value="1400" />
@@ -331,15 +327,15 @@
       <workItem from="1519669891667" duration="4106000" />
       <workItem from="1519741812762" duration="10884000" />
       <workItem from="1519812442282" duration="76000" />
-      <workItem from="1519848269991" duration="2839000" />
+      <workItem from="1519848269991" duration="2872000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19911000" />
+    <option name="totallyTimeSpent" value="19944000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28541666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -913,8 +909,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+        <state relative-caret-position="168">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
           <folding />
         </state>
       </provider>
