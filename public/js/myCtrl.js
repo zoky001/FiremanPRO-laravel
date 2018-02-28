@@ -311,7 +311,7 @@ appFiremanPro.controller('currrentIntervention', function ($scope, $http) {
         $scope.owner = "konkj";
         console.log($scope.owner);
         initMapAtHouse(houseData.address.latitude, houseData.address.longitude);
-        setMarker(houseData.address.latitude, houseData.address.longitude);
+        setMarker(houseData.address.longitude, houseData.address.latitude);
         setNewPatrolListener();
 
         /*   var mapCanvas = document.getElementById("map");

@@ -38,8 +38,8 @@ function initMapAtHouse(long, lat) {
 }
 
 function setMarker(long, lat) {
-   console.log("set marker:  "+long + " " + lat);
-    var myCenter = new google.maps.LatLng(long, lat);
+   console.log("set obican marker:  "+long + " " + lat);
+    var myCenter = new google.maps.LatLng(lat, long);
     var marker = new google.maps.Marker({
         position: myCenter,
         animation: google.maps.Animation.BOUNCE,
@@ -51,8 +51,8 @@ function setMarker(long, lat) {
 
 }
 function setFiremanMarker(long, lat) {
-    console.log("set marker:  "+long + " " + lat);
-    var myCenter = new google.maps.LatLng(long, lat);
+    console.log("set fireman marker:  "+long + " " + lat);
+    var myCenter = new google.maps.LatLng(lat, long);
     var marker = new google.maps.Marker({
         position: myCenter,
        // animation: google.maps.Animation.BOUNCE,
