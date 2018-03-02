@@ -60,8 +60,9 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
      });
      */
 
-
+var ID_house = "";
     function startIntervention(id_house) {
+        ID_house = id_house;
         console.log("START: " + id_house);
 
 
@@ -107,12 +108,17 @@ appFiremanPro.controller('intervention', function ($scope, $http) {
 
         var data = {
             "notification": {
-                "title": "Intervencija!!!",
-                "body": id,
+                "title": "Nova požarna intervencija!!!",
+                "body": "Intervencija na sljedećoj adresi: \n Ulica_jedna_nova_ broj 15, \n Neko Selo \n 42208 Cestica",
                 "icon": "https://rtl-cdnstatic.r.worldssl.net/image/1a630558ebc60967f71e402def2f4079_view_article_new.jpg?v=20",
                 //  "click_action": "http://127.0.0.1:8000/firestore"
             },
-            "to": notification_id
+            "to": notification_id,
+            "data": {
+                "message": "Zapalila se štala",
+                "intervention_id": id,
+                "houses_id": ID_house
+            }
 
         };
         $http.post("https://fcm.googleapis.com/fcm/send", data, config)
