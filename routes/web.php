@@ -31,3 +31,10 @@ Route::get('/firestore/newHouse', 'FirestoreController@newHouse')->name('newHous
 Route::get('/firestore/newIntervention', 'FirestoreController@newIntervention')->name('newIntervention');
 
 Route::get('/firestore/currentIntervention/{id}', 'FirestoreController@currentIntervention')->name('currentIntervention');
+
+
+//Twilio SMS
+Route::get('/SMS/send', 'TwilioSMSController@sendSMS')->name('sendSMS');
+
+//Firebase
+Route::get('/firebase/sendFcm', 'firebase\messageController@sendFCM')->name('sendFCM');

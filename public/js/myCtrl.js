@@ -111,6 +111,7 @@ var ID_house = "";
                 "title": "Nova požarna intervencija!!!",
                 "body": "Intervencija na sljedećoj adresi: \n Ulica_jedna_nova_ broj 15, \n Neko Selo \n 42208 Cestica",
                 "icon": "https://rtl-cdnstatic.r.worldssl.net/image/1a630558ebc60967f71e402def2f4079_view_article_new.jpg?v=20",
+                "sound" : "default"
                 //  "click_action": "http://127.0.0.1:8000/firestore"
             },
             "to": notification_id,
